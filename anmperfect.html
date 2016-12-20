@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>完美运动框架</title>
+	<link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width:480px)">
+	<link rel="stylesheet" href="../css/tablepc.css"     media="screen and (min-width:481px) and (max-width:800px)">
+	<link rel="stylesheet" href="../css/pc.css"     media="screen and (min-width:801px)">
+	<style type="text/css">
+		#div1{
+			width:200px;
+			height:200px;
+			background-color:yellowgreen;
+			opacity:1;
+			opacity:1;
+			border-radius: 50%;
+			border: 5px dotted #fff;
+			/* position:absolute;
+			left:20px; */
+		}
+		#div2{
+			width:200px;
+			height:200px;
+			background-color:#F6830D;
+			opacity:1;
+			opacity:1;
+			margin-top:200px;
+			/* position:absolute;
+			left:20px; */
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var mId=document.getElementById('div1');
+			var mId1=document.getElementById('div2');
+			mId.timer=null;
+			mId.onmouseover=function (){startmove(mId,{height:360,width:400,opacity:30},function(){
+				startmove(mId,{width:600});});}
+			mId.onmouseout=function (){startmove(mId,{height:200,width:200,opacity:100},function(){
+				startmove(mId,{width:600});});}
+			mId1.onmouseover=function (){startmove(mId1,{height:360,width:600},function(){
+				console.log('恭喜你，调用成功！');}
+				//startmove(mId1,{opacity:30});}
+			);}
+		}
+		//var timer=null;
+      function getStyle(obj,attr){
+      	var Styat=null;
+      	if(obj.currentStyle){mStyleAttr=obj.currentStyle[attr];}
+      	else{Styat=window.getComputedStyle(obj,false)[attr];} 
+      //	attr=='opacity' ? return(parseFloat(mStyleAttr)*100): return(parseInt(mStyleAttr));
+      attr=='opacity' ? Styat=Math.round(parseFloat(Styat)*100) : Styat=parseInt(Styat); 
+      //Styat可能出现小数round四舍五入
+      console.log(Styat);
+      	return Styat;
+      	//console.log(Styat);//return 之后的代码不执行
+      	//if(attr=='opacity')
+      	}
+
+       function startmove(obj,json,fn) {
+			clearInterval(obj.timee);
+			obj.timee = setInterval(function () {
+				var flag = true;//看这里 1
+				for(var attr in json){
+					var ico = 0;
+					if (attr=='opacity') {
+					ico = parseFloat(getStyle(obj,attr))*100;
+					}else{
+						ico = parseInt(getStyle(obj,attr));
+						}
+					var speed = (json[attr]-ico)/8;
+					speed = speed>0? Math.ceil(speed):Math.floor(speed);
+					if(json[attr]!=ico){
+						flag = false;//看这里 2
+						if (attr=='opacity') {
+						//obj.style.filter = 'alpha(opacity:'+(ico+speed)+')';
+						obj.style.opacity = ( speed + ico )/100;
+							}else{
+								obj.style[attr] = speed + ico+'px';
+								}
+					}
+				}
+				if (flag) {//同时动作做完了才清除定时器
+				clearInterval(obj.timee);
+				if (fn) {fn(obj);}
+				}
+			},30);
+}
+	</script>
+</head>
+<body>
+<div id='div1'></div>
+<!--<div id='div2'></div>		-->
+<div id='div3'>
+
+<div class="h1">第一个标题</div>	
+<div class="h2">第2个标题</div>	
+<span class="h3">第span</span>	
+<div class="h1">第4个标题</div>	
+</div>
+</bod3>
+</body>
+</html>
