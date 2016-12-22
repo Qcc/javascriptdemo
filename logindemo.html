@@ -1,0 +1,149 @@
+
+
+api.php?m=
+user=<?php user?>
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+<style>
+*{margin:0;padding:0;}
+input{border:none;border:1px solid #7F7F7F;}
+a{ text-decoration:none; width:20px; text-align:center; line-height:20px; height:20px; position:absolute; top:10px; right:8px; color:#fff;}
+html{width:100%;height:100%;}
+body{width:100%;height:100%;}
+#cover{background:rgba(0,0,0,0.2);height:100%;width:100%;position:absolute;display:none;}
+#sub{position:absolute;top:100px;width:80px;height:40px;background:#D4B6B7;color:#FFFFFF;font-size:14px;}
+.login{text-align:center;}
+.Interface{width:400px;height:300px;background:#FFFFFF;position:absolute;left:42%;top:30%;}
+h3{padding:15px;font-size:16px;color:#FDFDFD;background:#868585;margin-bottom:50px;}
+.confirm{width:80px;height:30px;font-size:12px;background:#FBFBFB;border:1px solid #888888;margin:0 10px; margin-top:50px;}
+.user{height:25px;margin-right:20px;}
+.Password{height:25px;margin-right:20px;}
+.mad{letter-spacing:8px;}
+.reset{width:80px;height:30px;font-size:12px;background:#FBFBFB;border:1px solid #888888;margin:0 10px; margin-top:50px;}
+.pop{display:block;}
+span{font-size:9px;color:#E1E0E0;position:absolute;}
+</style>
+<script>
+window.onload=function(){
+        var oBox=document.getElementsByClassName('Interface')[0];
+        var oSub=document.getElementById('sub');
+        var login_h=document.getElementsByClassName('login_h')[0];
+        var oCover=document.getElementById('cover');
+        var closeBtn=document.getElementById('closeBtn');
+        var oPd=document.getElementsByClassName('Password')[0];
+        var oCf=document.getElementsByClassName('confirm')[0];
+        var oSet=document.getElementsByClassName('reset')[0];
+        var oUser=document.getElementsByClassName('user')[0];
+        var oForm=document.getElementsByTagName('form')[0];
+        var tran=true;
+        //居中显示
+        function setPosition(){
+                var w = (document.documentElement.clientWidth - oBox.offsetWidth)/2;
+                var h = (document.documentElement.clientHeight - oBox.offsetHeight)/2;
+                oBox.style.left = w + 'px';
+                oBox.style.top  = h + 'px';
+        }
+        window.onresize = function(){
+                setPosition();
+        }
+        oSub.onclick=function(){
+                oCover.style.display='block'        
+        };
+        oCf.onclick=function(){
+                if(oPd.value!=''&& oUser.value!=''){
+                        if(oPd.value!=''){
+                                if(isNaN(oPd.value)){
+                                }else{
+                                        alert('密码至少包含字母、下划线')
+                                };
+                        };
+                        if(oUser.value!=''){
+                                if(isNaN(oUser.value)){
+                                }else{
+                                        alert('用户名不能只由数字组成')
+                                };
+                        };
+                //oForm.action="http://www.baidu.com";        
+                }else{
+                return false
+                };
+        };
+        oSet.onclick=function(){
+                oPd.value='';
+                oUser.value='';
+        };
+        closeBtn.onclick=function(){
+                oCover.style.display='none'        
+        };
+        
+//------------鼠标拖拽
+        draw(oBox,login_h);//调用
+        function draw(elm,title){
+                title=title || elm;//如果传入标题，就拖拽标题
+                
+                //鼠标在div上按下
+                title.onmousedown=function(ev){
+                        //鼠标的坐标-oDiv offsetLeft
+                        var oEv=ev || window.event;
+                        var disX=oEv.clientX-elm.offsetLeft;
+                        var disY=oEv.clientY-elm.offsetTop;
+                        //屏幕上移动鼠标，div跟随鼠标移动
+                        document.onmousemove=function(ev){
+                                var oEv=ev || window.event;
+                                var l=oEv.clientX-disX;//横坐标
+                                var t=oEv.clientY-disY;//纵坐标
+                                if(l<0){
+                                        l=0
+                                };
+                                if(l>document.documentElement.clientWidth-elm.offsetWidth){
+                                        l=document.documentElement.clientWidth-elm.offsetWidth;
+                                };
+                                if(t<0){
+                                        t=0
+                                };
+                                if(t>document.documentElement.clientHeight-elm.offsetHeight){
+                                        t=document.documentElement.clientHeight-elm.offsetHeight;
+                                }
+                                
+                                elm.style.top=t+'px';
+                                elm.style.left=l+'px';
+                        };
+                        //鼠标抬起的时候，停止移动
+                        document.onmouseup=function(){
+                                document.onmousemove=null;
+                        };
+                        oEv.cancelBubble=true
+                        return false;
+                        
+                };
+        };
+        
+        //target="_self" 当前页面打开
+        //target="_blank"另开一个页面显示内容
+        
+};
+</script>
+</head>
+<body>
+<div class="login">
+        <button type="submit" id="sub">进入系统</button>
+    <div id="cover">
+        <div class="Interface">
+            <h3 class="login_h">登录界面</h3>
+            <a id="closeBtn" href="javascript:;">×</a>
+          <label>用户名</label>:<input type="text" class="user" maxlength="18" title="请输入用户名"><span>(至少包含字母、下划线)</span><br><br>
+            <label class="mad">密码</label>:<input type="password" class="Password" maxlength="18"  title="请输入密码"><span>(至少6位数字)</span><br><br>
+            <form method="POST" action="http://www.baidu.com" target="_blank" >
+                <button type="submit" class="confirm" >登录</button>
+                <button type="reset" class="reset">重置</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

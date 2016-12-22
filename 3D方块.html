@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>cube</title>
+		<style>
+			*{margin: 0;padding:0;}
+			body{
+				background:#ccc;
+				-webkit-perspective:1200px;
+				}
+			#box{
+				-webkit-transform-style: preserve-3d ;
+				height: 300px;
+				width: 300px;
+				margin: 150px auto;
+				position: relative;
+				-webkit-animation:rotate 10s linear infinite;
+			}
+			.cubeDiv{
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				height: 300px;
+				width: 300px;
+				opacity: .8;				
+			}
+			#box div:nth-child(1){
+				background:url("http://cdn.attach.w3cfuns.com/notes/pics/201610/29/105623u3t13nftk219c2f6.jpg"); ;
+				-webkit-transform:translateZ(150px);
+			}
+			#box div:nth-child(2){
+				background:url("http://cdn.attach.w3cfuns.com/notes/pics/201610/29/105623gcr6fkwfw4w6vfru.jpg"); ;
+				-webkit-transform:translateZ(-150px);
+			}
+			#box div:nth-child(3){
+				background:url("http://cdn.attach.w3cfuns.com/notes/pics/201610/29/105623lqmze33vme5jfpef.jpg"); ;
+				-webkit-transform:rotateX(90deg) translateZ(150px);
+			}
+			#box div:nth-child(4){
+				background:url("http://cdn.attach.w3cfuns.com/notes/pics/201610/29/105623ldgdmg4dbeirdvvz.jpg"); ;
+				-webkit-transform:rotateX(-90deg) translateZ(150px);
+			}
+			#box div:nth-child(5){
+				background:url("http://cdn.attach.w3cfuns.com/notes/pics/201610/29/105623taf47fff0recermw.jpg"); ;
+				-webkit-transform:rotateY(90deg) translateZ(150px);
+			}
+			#box div:nth-child(6){
+				background:url("http://cdn.attach.w3cfuns.com/notes/pics/201610/29/105622j6qzwg5vttox0vmx.jpg"); ;
+				-webkit-transform:rotateY(-90deg) translateZ(150px);
+			}
+			@-webkit-keyframes rotate{
+				0%{
+					-webkit-transform:rotateY(0deg) rotateX(0deg);
+				}
+				100%{
+					-webkit-transform:rotateY(360deg) rotateX(360deg);					
+				}
+			}
+			@-webkit-keyframes rotate2{
+				0%{
+					-webkit-transform:rotateY(0deg);
+				}
+				100%{
+					-webkit-transform:rotateY(360deg);					
+				}
+			}
+		</style>
+	</head>
+	<script src ="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+	<body>
+		<div id = "box">
+			<div class = "cubeDiv"></div>
+			<div class = "cubeDiv"></div>
+			<div class = "cubeDiv"></div>
+			<div class = "cubeDiv"></div>
+			<div class = "cubeDiv"></div>
+			<div class = "cubeDiv"></div>
+		</div>
+	</body>
+	<script>
+		var flag = true; 
+		$(document).ready(function(){
+			$(".cubeDiv").click(function(){
+				if(flag){
+					$("#box").css({
+						"animation" : "rotate2 10s linear infinite"
+					})
+					$(".cubeDiv").eq(0).css({
+						"transform":"translateZ(300px)",	
+					})				
+					$(".cubeDiv").eq(1).css({
+						"transform":"translateZ(300px) rotateY(60deg)",
+						"transform-origin":"0 0 ",
+						"left":"350px",
+					})
+					$(".cubeDiv").eq(2).css({
+						"transform":"translateZ(-300px) rotateY(-60deg)",	
+						"transform-origin":"0 0 ",
+						"left":"350px",
+					})
+					$(".cubeDiv").eq(3).css({
+						"transform":"translateZ(-300px) rotateY(180deg)",								
+					})
+					$(".cubeDiv").eq(4).css({
+						"transform":"translateZ(-300px) rotateY(60deg)",
+						"transform-origin":"right 0 ",
+						"left":"-350px",					
+					})
+					$(".cubeDiv").eq(5).css({
+						"transform":"translateZ(300px) rotateY(-60deg)",
+						"transform-origin":"right 0 ",
+						"left":"-350px",					
+					})
+					flag = false;
+				}else{
+					$("#box").css({
+						"animation" : "rotate 10s linear infinite"
+					})
+					$(".cubeDiv").css({
+						"transform-origin":"center center ",
+						"left":"0"
+					})
+					$(".cubeDiv").eq(0).css({
+						"transform":"translateZ(150px)",							
+					})				
+					$(".cubeDiv").eq(1).css({
+						"transform":"translateZ(150px)",
+					})
+					$(".cubeDiv").eq(2).css({
+						"transform":"rotateX(90deg) translateZ(150px)",	
+					})
+					$(".cubeDiv").eq(3).css({
+						"transform":"rotateX(-90deg) translateZ(150px)",
+					})
+					$(".cubeDiv").eq(4).css({
+						"transform":" rotateY(90deg) translateZ(150px)",
+					})
+					$(".cubeDiv").eq(5).css({
+						"transform":" rotateY(-90deg) translateZ(150px)",
+					})
+					flag = true;
+				}
+				
+			})
+		})
+	</script>
+</html>

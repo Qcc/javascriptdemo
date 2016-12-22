@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+                <title></title>
+
+                <style type="text/css">
+                        form.registerForm .r_item {
+                                width: 100%;
+                                min-height: 40px;
+                                overflow: hidden;
+                                -webkit-box-sizing: border-box;
+                                -moz-box-sizing: border-box;
+                                box-sizing: border-box;
+                                padding-left: 50px;
+                                position: relative;
+                                margin-bottom: 15px;
+                                line-height: 40px;
+                        }
+                        
+                        form.registerForm .r_item>label {
+                                display: block;
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                width: 48px;
+                                height: 40px;
+                                line-height: 40px;
+                                text-align: right;
+                                overflow: hidden;
+                                color: #333;
+                                font-size: 12px;
+                        }
+                        
+                        form.registerForm .r_item input {
+                                width: 98%;
+                                height: 40px;
+                                -webkit-box-sizing: border-box;
+                                -moz-box-sizing: border-box;
+                                box-sizing: border-box;
+                                border: 1px #ECECEC solid;
+                                padding: 0 10px;
+                                line-height: 40px;
+                                border-radius: 3px;
+                                margin-left: 2%;
+                        }
+                        
+                        form.registerForm .special {
+                                padding-right: 82px;
+                        }
+                        
+                        form.registerForm .special .send_code {
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                background: #F85F48;
+                                width: 85px;
+                                text-align: center;
+                                height: 40px;
+                                line-height: 40px;
+                                color: white;
+                        }
+                        
+                        form.registerForm input[type=submit] {
+                                width: 100%;
+                                height: 40px;
+                                color: white;
+                                background: #F85F48;
+                                margin-top: 3rem;
+                                border:0;
+                        }
+                </style>
+        </head>
+
+        <body>
+                <form class="registerForm">
+                        <div class="r_item">
+                                <label for="">手机号：</label>
+                                <input type="tel" name="" id="r_tel" value="" placeholder="请填写您的手机号码" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="11" />
+                        </div>
+                        <div class="r_item special">
+                                <label for="">验证码：</label>
+                                <input type="tel" name="" id="r_Ver_code" value="" placeholder="短信验证码" />
+                                <cite class="send_code">
+                  <label class="obtain" style="display: inline-block;">获取验证码</label>
+                  <label class="repeat" style="display: none;">重新发送<span class="count_down">60</span></label>
+                </cite>
+                        </div>
+                        <input type="submit" value="提交" />
+                </form>
+                <script src="js/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+                <script type="text/javascript">
+                        var $forgetPhonezz = /^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$|17[0-9]{9}$/;
+                        $("form.registerForm .special .send_code  .obtain").click(function() {
+                                var $r_tel = $('#r_tel').val();
+                                if(!$forgetPhonezz.test($r_tel)) {
+                                        alert('请输入正确的手机号码')
+                                        return false;
+                                } else {
+                                        //倒计时
+                                        $(this).hide();
+                                        $("form.registerForm .special .send_code .repeat").css("display", "block");
+                                        $('.r_main .popup').css("display", "block").fadeOut(3000);
+                                        var time = 60;
+                                        var time_f;
+                                        time_f = setInterval(function() {
+                                                if(time == 1) {
+                                                        clearInterval(time_f);
+                                                        $("form.registerForm .special .send_code .repeat").hide();
+                                                        $("form.registerForm .special .send_code .obtain").show().html("重新获取");
+                                                        $("form.registerForm .special .send_code .repeat .count_down").html(60);
+                                                } else {
+                                                        time--;
+                                                        $("form.registerForm .special .send_code .repeat .count_down").html(time);
+                                                }
+                                        }, 1000);
+                                }
+                        });
+                        $('.registerForm').submit(function() {
+                                var $r_tel = $('#r_tel').val();
+                                var $verification = $.trim($("#r_Ver_code").val());
+                                
+                                if(!$forgetPhonezz.test($r_tel)) {
+                                        alert('请输入正确的手机号码')
+                                        return false;
+                                }
+                                if($verification == "") {
+                                        alert('请输入验证码')
+                                        return false;
+                                }
+
+                                return true;
+                        });
+                </script>
+        </body>
+
+</html>
