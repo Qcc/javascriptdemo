@@ -4,47 +4,76 @@
 <meta charset="utf-8">
 <style>
     table{
-        border: 1px solid #000;
+         
         border-collapse: collapse;
     }
-    .blue{
-        color: red;
+    .odd{
+        background-color: #fff38f;
+    }
+    .even{
+        background-color: #ffffee
     }
 </style>
 <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
  <script> 
 $(document).ready(function(){
-   
-  $("#btn").click(function () {
-      $("#panel").toggleClass("blue");
-  });
-  $("#flip").click(function () {
-      $("#panel").removeClass("blue");
-  });
+    $("tbody>tr:odd").addClass("odd");
+    $("tbody>tr:even").addClass("even");
 });
 </script>
  
 <style type="text/css"> 
-#panel,#flip
-{
-	padding:5px;
-    width: 50px;
-	text-align:center;
-	background-color:#e5eecc;
-	border:solid 1px #c3c3c3;
-}
-#panel
-{
-	padding:50px;
-    width: 100px;
-    position: relative;
-}
+
 </style>
 </head>
 <body>
- <button id="btn">立即完成</button>
-<div id="flip">点我，执行动画</div>
-<div id="panel">Hello world!</div>
-
+    <input id="btnAdd" type="button" value="添加">
+    <input id="btnRemove" type="button" value="删除">
+<table border="1">
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>暂住地</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>男</td>
+        <td>深圳</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
