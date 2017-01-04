@@ -20,7 +20,9 @@
  function btnshowf() {
         var show = document.getElementById("show");
         var option = document.getElementById("option");
+ 
         show.innerHTML = option.dataset.wangLi;
+ 
         console.log("run");
     }
 </script>
@@ -31,7 +33,7 @@
 </head>
 <body>
     <input id="btnShow" type="button" value="添加" onclick="btnshowf()">
-    <div id="option" data-wang-li="我是设置的属性">
+    <div id="option" data-wang="我是设置的属性">
         我有属性
     </div>
     <div id="show"></div>
