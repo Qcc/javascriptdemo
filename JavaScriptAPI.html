@@ -2,41 +2,18 @@
 <html>
 <head>
 <meta charset="utf-8">
-<style>
-    table{
-         
-        border-collapse: collapse;
-    }
-    .odd{
-        background-color: #fff38f;
-    }
-    .even{
-        background-color: #ffffee
-    }
-</style>
-<script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
- <script> 
- var btnshow = document.getElementById("btnShow");
- function btnshowf() {
-        var show = document.getElementById("show");
-        var option = document.getElementById("option");
- 
-        show.innerHTML = option.dataset.wangLi;
- 
-        console.log("run");
-    }
-</script>
- 
-<style type="text/css"> 
-
-</style>
+<link type="text/css" rel="stylesheet" href="css/pc.css">
 </head>
 <body>
-    <input id="btnShow" type="button" value="添加" onclick="btnshowf()">
-    <div id="option" data-wang="我是设置的属性">
-        我有属性
-    </div>
-    <div id="show"></div>
+    <div id="show">
+        <button >Yes!</button>
+        <button class="yes">ok</button>
+        <button class="cancel"><div>cancel</div></button>
+    </div><br/>
+    <div id="linear-h"></div><br/>
+    <div id="linear-v"></div><br/>
+    <div id="trans-under"></div><br/>
+    <div id="trans">随便一些文字随便一些文字随便一些文字随便一些文字随便一些文字随便一些文字随便一些文字随便一些文字</div><br/>
 </table>
 </body>
 </html>
